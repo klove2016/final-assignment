@@ -21,6 +21,8 @@
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "Add Availability", new_user_availability_path(user) %></td>
+        <td><%= link_to "View Availabilities", user_availabilities_path(user) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,3 +31,5 @@
 <br>
 
 <%= link_to 'New User', new_user_path %>
+
+
