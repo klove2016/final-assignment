@@ -1,0 +1,23 @@
+
+
+
+<h1>Common Availabilities</h1>
+
+<% if flash[:error] %>
+  <p><%= flash[:error] %></p>
+<% else %>
+  <% @user_availability_pairs.each do |user_pair, common_slots| %>
+    <h2><%= user_pair.map(&:name).join(" and ") %></h2>
+    <% if common_slots.any? %>
+      <ul>
+        <% common_slots.each do |slot| %>
+          <li>
+            <%= l(slot[0], format: :short) %> to <%= l(slot[1], format: :short) %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No common availabilities found</p>
+    <% end %>
+  <% end %>
+<% end %>

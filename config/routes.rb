@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   root to: 'users#index'
-  resources :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'availabilities/compare', to: 'availabilities#compare', as: 'availabilities_compare'
+  post 'users/:id/compare_availability', to: 'users#compare_availability', as: 'compare_availability'
+  resources :users do
+    resources :availabilities
+  end
 end
+
+
