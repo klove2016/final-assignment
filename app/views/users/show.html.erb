@@ -18,3 +18,23 @@
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
 <td><%= link_to "Add Availability", new_user_availability_path(@user) %></td>
+
+<h1><%= @user.name %></h1>
+
+<p>Availabilities:</p>
+
+<ul>
+  <% @user.availabilities.each do |availability| %>
+    <li>
+      <%= l(availability.start_time, format: :short) %> to <%= l(availability.end_time, format: :short) %>
+    </li>
+  <% end %>
+</ul>
+
+<p>Compare with:</p>
+
+<%= form_tag(availabilities_compare_path, method: :get) do %>
+  <%= select_tag :user_names, options_from_collection_for_select(User.all, :name, :name, selected: @user.name), multiple: true %>
+  <%= submit_tag "Compare" %>
+<% end %>
+

@@ -57,6 +57,11 @@ class UsersController < ApplicationController
     end
   end
 
+  
+  def compare_availability
+    redirect_to availabilities_compare_path(user_names: params[:user_names])
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
