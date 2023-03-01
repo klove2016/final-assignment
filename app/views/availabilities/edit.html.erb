@@ -1,0 +1,6 @@
+<h1>Editing Availability</h1>
+
+<%= render 'form', availability: @availability %>
+
+<%= link_to 'Show', user_availability_path(@availability.user, @availability) %> |
+<%= link_to 'Back', user_availabilities_path(@user) %>
