@@ -1,8 +1,16 @@
 class Availability < ApplicationRecord
   belongs_to :user
 
-  validates :title, presence: true, length: { maximum: 50 }
-  validates :start_time, presence: true, format: { with: /\A\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\z/ }
-  validates :end_time, presence: true, format: { with: /\A\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\z/ }, date: { after: :start_time }
-  
+  validates :title, presence: true
+  validates :start_time, presence: true
+  validates :end_time, presence: true
+  validate :start_time_before_end_time
+
+  private
+
+  def start_time_before_end_time
+    if start_time && end_time && start_time >= end_time
+      errors.add(:start_time, "must be before end time")
+    end
+  end
 end
