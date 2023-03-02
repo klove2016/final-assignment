@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
   before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
@@ -71,5 +72,10 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:name, :phone, :email)
+    end
+
+    def catch_not_found
+      flash[:alert] = "User not found"
+      redirect_to users_path
     end
 end

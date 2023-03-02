@@ -1,4 +1,5 @@
 class AvailabilitiesController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
   before_action :set_availability, only: %i[ show edit update destroy ]
 
   # GET /availabilities or /availabilities.json
@@ -50,7 +51,12 @@ class AvailabilitiesController < ApplicationController
   def update
     @user = User.find(params[:user_id])
     @availability = Availability.find(params[:id])
-    @availability.update(availability_params)
+ 
+    if @availability.update(availability_params)
+      redirect_to user_availability_path(@user, @availability), notice: 'Availability was successfully updated.'
+    else
+      render :edit
+    end
   end
   
   
@@ -61,23 +67,19 @@ class AvailabilitiesController < ApplicationController
     @availability.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_path, notice: "Availability was successfully destroyed." }
+      format.html { redirect_to user_availabilities_path(@user), notice: "Availability was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   def compare
+    @user = User.find(params[:user_id])
     user_names = params[:user_names]
     users = User.where(name: user_names)
     
-    if users.count < 2
-      flash[:error] = "Please select at least two users"
-      redirect_to new_user_availability_path(user_id: params[:user_id])
-    else
-      user_ids = users.pluck(:id)
-      @user_availability_pairs = find_common_availability(user_ids)
-      render 'compare'
-    end
+    user_ids = users.pluck(:id)
+    @user_availability_pairs = find_common_availability(user_ids)
+    render 'compare'
   end
   
   
@@ -124,10 +126,25 @@ class AvailabilitiesController < ApplicationController
     def set_availability
       @availability = Availability.find(params[:id])
       @user = @availability.user
+
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "Availability not found"
+      redirect_to user_availabilities_path(params[:user_id])
     end
 
     # Only allow a list of trusted parameters through.
     def availability_params
       params.require(:availability).permit(:title, :start_time, :end_time, :user_id)
     end
+
+    def catch_not_found
+      flash[:alert] = "Availability not found"
+      if params[:user_id]
+        redirect_to user_availabilities_path(params[:user_id])
+      else
+        redirect_to users_path
+      end
+    end
+    
+  
 end
