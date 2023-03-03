@@ -1,6 +1,8 @@
 class AvailabilitiesController < ApplicationController
+
     rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
     before_action :set_availability, only: %i[show edit update destroy]
+
 
     def index
       @user = User.find(params[:user_id])
@@ -34,6 +36,7 @@ class AvailabilitiesController < ApplicationController
       end
     end
 
+
     def update
       @user = User.find(params[:user_id])
       if @availability.update(availability_params)
@@ -52,6 +55,7 @@ class AvailabilitiesController < ApplicationController
       end
     end
 
+
     def compare
       user_names = params[:user_names]
       users = User.where(name: user_names)
@@ -59,6 +63,7 @@ class AvailabilitiesController < ApplicationController
       @user_availability_pairs = find_common_availability(user_ids)
       render 'compare'
     end
+
 
     def find_common_availability(user_ids)
       users = User.find(user_ids)
@@ -92,6 +97,8 @@ class AvailabilitiesController < ApplicationController
     def set_availability
       @availability = Availability.find(params[:id])
       @user = @availability.user
+
+
     rescue ActiveRecord::RecordNotFound
       flash[:alert] = "Availability not found"
       redirect_to user_availabilities_path(params[:user_id])
@@ -109,4 +116,6 @@ class AvailabilitiesController < ApplicationController
         redirect_to users_path
       end
     end
+
   end
+

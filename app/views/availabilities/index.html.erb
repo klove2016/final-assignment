@@ -36,6 +36,7 @@
           <td scope="col">End Time</td>
           <td scope="col"></td>
       </tr>
+
       <% @user.availabilities.each do |availability| %>
         <tr>
           <td><%= availability.title %></td>
@@ -57,3 +58,4 @@
       <% end %>
     </tbody>
   </table>
+
