@@ -1,10 +1,42 @@
+<% if notice %>
+  <div id="notice"><%= notice %></div>
+<% end %>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <h1 class="navbar-brand">Compare Users Availability</h1>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+              <%= link_to 'Home', users_path, class:"nav-link "  %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'New User', new_user_path, class: "nav-link" %>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+</nav>
+<h1 class= "pb-3 pt-2">Compare Availabilities</h1>
+<h6 class = "pb-3 pt-2">Select two or more users to compare your availablities</h6>
 
+<%= form_tag(availabilities_compare_path, method: :get) do %>
+  <% User.all.each do |user| %>
+    <%= check_box_tag 'user_names[]', user.name %>
+    <%= label_tag user.name %>
+  <% end %>
+  <%= submit_tag "Compare", id:"compare_button", disabled: true %>
+<% end %>
 
-
-<h1>Common Availabilities</h1>
+<h1 class= "pb-3 pt-2">Common Availabilities</h1>
 
 <% if flash[:error] %>
-  <p><%= flash[:error] %></p>
+  <div class="alert alert-danger" role="alert">
+    <%= flash[:error] %>
+  </div>
 <% else %>
   <% @user_availability_pairs.each do |user_pair, common_slots| %>
     <h2><%= user_pair.map(&:name).join(" and ") %></h2>
@@ -21,3 +53,11 @@
     <% end %>
   <% end %>
 <% end %>
+
+
+
+
+
+
+
+

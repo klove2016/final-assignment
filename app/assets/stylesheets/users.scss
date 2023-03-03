@@ -1,3 +1,131 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+* {
+    background-color:  aquamarine;
+    color:black;
+   
+}
+.navbar-brand:hover {
+  color: aquamarine; /* set the desired hover color */
+}
+.profiler-results {
+    display: none;
+  }
+  .table > :not(caption) > * > *{
+    border:none;
+ 
+  }
+  
+ table {
+    
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.accordion-button:not(.collapsed), .accordion-button.collapsed {
+     background-color: rgb(3, 27, 3);
+     color:aquamarine;
+     text-align: center;
+     
+  }
+ 
+  .accordion-button.collapsed:hover {
+    text-decoration: underline aquamarine 2px;
+  }
+  .accordion-button:not(.collapsed)::after, .accordion-button.collapsed::after {
+    background-image: none;
+  }
+
+   .btn-secondary.dropdown-toggle{
+    background-color: rgb(3,27,3); 
+    color: aquamarine; 
+  }
+  
+ 
+  .container-fluid, .nav-link, .navbar-brand, .navbar-collapse{
+    background-color: rgb(3, 27, 3);
+    color:aquamarine
+    ;
+  }
+    a.nav-link:hover {
+        color:aquamarine;
+        border: 2px solid aquamarine;
+        background-color: rgb(3, 27, 3);
+        padding: 5px;
+    }
+   
+    .dropdown-item:hover {
+        background-color: rgb(3, 27, 3);
+        text-decoration: underline aquamarine 2px;
+        color:aquamarine;
+    }
+  .navbar-toggler,.navbar-toggler.collapsed,.navbar-toggler-icon {
+    padding: 0;
+    margin: 0;
+    color: rgb(3, 27, 3);
+    background-color: aquamarine;
+  }
+  
+  .navbar {
+    
+    width:100%;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: 5px solid rgb(44, 141, 109);
+  }
+  .accordion .accordion-item {
+    border: 1px solid aquamarine
+  }
+  .accordion-button:focus {
+    box-shadow: none;
+  }
+  .accordion {
+    text-align: center;
+    position: relative; 
+    top: 50%; 
+    width:100%;
+    background-color: aquamarine;
+    color:rgb(3, 27, 3);
+   
+  }
+  .dropdown button {
+    background-color: aquamarine;
+    color: rgb(3, 27, 3);
+    border: 2px solid rgb(3, 27, 3);
+    
+  }
+  .dropdown-menu, .dropdown-item {
+    background-color: rgb(3, 27, 3);
+    color: aquamarine;
+  }
+  .dropdown-item {
+    padding:3px;
+    border: 1px solid aquamarine;
+  }
+ 
+.form-group{
+  
+  margin-left:25%;
+  margin-right:25%;
+  width:50%;
+}
+#user-form-submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  margin-left:25%;
+  margin-right:25%;
+  width:50%;
+  color: aquamarine;
+  background-color: rgb(3, 27, 3);
+  border: 2px solid rgb(3, 27, 3);
+}
+
+
+  
+

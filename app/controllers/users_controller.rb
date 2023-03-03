@@ -9,15 +9,18 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    @users= User.all
   end
 
   # GET /users/new
   def new
+    @users= User.all
     @user = User.new
   end
 
   # GET /users/1/edit
   def edit
+    @users= User.all
   end
 
   # POST /users or /users.json
@@ -37,16 +40,15 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    @user = User.find(params[:id])
+    @users = User.all # set @users variable here
+    if @user.update(user_params)
+      redirect_to @user, notice: 'User was successfully updated.'
+    else
+      render :edit
     end
   end
+  
 
   # DELETE /users/1 or /users/1.json
   def destroy

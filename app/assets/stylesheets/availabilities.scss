@@ -1,3 +1,30 @@
 // Place all the styles related to the Availabilities controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+#availability-form-submit, #compare-button  {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-left:25%;
+    margin-right:25%;
+    width:50%;
+    color: aquamarine;
+    background-color: rgb(3, 27, 3);
+    border: 2px solid rgb(3, 27, 3);
+  }
+ 
+  #compare_button{
+    background-color: rgb(3, 27, 3);
+    border: 2px solid rgb(3, 27, 3);
+    color:  aquamarine;
+  }
+  
+   #compare_button:disabled {
+    background-color: rgb(83, 81, 81);
+    color: aquamarine;
+    cursor: not-allowed;
+    
+  }
+  h1, h2, h6, p, ul{
+    margin: 0;
+  }
