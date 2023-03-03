@@ -1,34 +1,59 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Availabilities</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Start time</th>
-      <th>End time</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @availabilities.each do |availability| %>
-      <tr>
-        <td><%= availability.title %></td>
-        <td><%= availability.start_time %></td>
-        <td><%= availability.end_time %></td>
-        <td><%= availability.user_id %></td>
-        <td><%= link_to 'Show', user_availability_path(availability.user, availability) %></td>
-        <td><%= link_to 'Edit', edit_user_availability_path(availability.user, availability) %></td>
-        <td><%= link_to 'Destroy', user_availability_path(availability.user, availability), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% if notice %>
+  <div id="notice"><%= notice %></div>
+<% end %>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <h1 class="navbar-brand"><%=" #{@user.name}'s Availabilities" %></h1>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+              <%= link_to 'Home', users_path, class:"nav-link "  %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'New User', new_user_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Compare Availablities', availabilities_compare_path, class: "nav-link"%>
+          </li>
+          <li><%= link_to 'Add Availability', new_user_availability_path(@user), class: "nav-link"%></li>
+          <li><%= link_to "Back to #{@user.name}'s Profile", @user, class: "nav-link" %></li>
+        </ul>
+      </div>
+    </div>
+</nav>
+ <table class="table text-center">
+    
+    <thead>
+        <th class=" pt-5" colspan = "4" >Availabilities </th>
+    </thead>
+    <tbody>
+      <tr class="fw-bold">
+          <td scope="col">Title</td>
+          <td scope="col">Start Time</td>
+          <td scope="col">End Time</td>
+          <td scope="col"></td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<td><%= link_to 'Back to User', @user %></td>
-<%= link_to 'Back to Home', users_path %>
+      <% @user.availabilities.each do |availability| %>
+        <tr>
+          <td><%= availability.title %></td>
+          <td><%= availability.start_time %></td>
+          <td><%= availability.end_time %></td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Availability Actions
+              </button>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'Destroy', user_availability_path(availability.user, availability), method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %></li>
+                <li><%=  link_to 'Edit', edit_user_availability_path(availability.user, availability), class: "dropdown-item" %> </li>
+                <li><%= link_to 'Show',  user_availability_path(availability.user, availability), class: "dropdown-item"%></li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

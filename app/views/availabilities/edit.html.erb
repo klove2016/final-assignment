@@ -1,6 +1,28 @@
-<h1>Editing Availability</h1>
-
+<% if notice %>
+  <div id="notice"><%= notice %></div>
+<% end %>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <h1 class="navbar-brand"><%=" Editing #{@user.name}'s #{@availability.title} Availability" %> </h1>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+              <%= link_to 'Home', users_path, class:"nav-link "  %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'New User', new_user_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Compare Availablities', availabilities_compare_path, class: "nav-link"%>
+          </li>
+          <li><%= link_to 'Add Availability', new_user_availability_path(@user), class: "nav-link"%></li>
+          <li><%= link_to "Back to #{@user.name}'s Profile",@user, class: "nav-link" %></li>
+        </ul>
+      </div>
+    </div>
+</nav>
 <%= render 'form', availability: @availability %>
 
-<%= link_to 'Show', user_availability_path(@availability.user, @availability) %> |
-<%= link_to 'Back', user_availabilities_path(@user) %>

@@ -41,13 +41,15 @@ RSpec.describe "Users", type: :request do
       expect(response).to redirect_to user_path(id: User.last.id)
     end
   end
-  describe "post users_path with invalid data" do
-    it "does not save a new entry or redirect" do
-      user_attributes = FactoryBot.attributes_for(:user)
-      user_attributes.delete(:user)
-      expect { post users_path, params: {user: user_attributes}
-    }.to_not change(User, :count)
-      expect(response).to render_template(:new)
+   describe "post users_path" do
+    context "with invalid data" do
+      it "does not save a new entry or redirect" do
+        user_attributes = FactoryBot.attributes_for(:user, email: nil)
+        expect {
+          post users_path, params: { user: user_attributes }
+        }.to_not change(User, :count)
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
   end
   describe "put user_path with valid data" do
@@ -78,4 +80,3 @@ RSpec.describe "Users", type: :request do
     end
   end
 end
-
